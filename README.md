@@ -1,0 +1,2 @@
+# Real-time-facial-expressions-recognition-and-fuzzy-logic-emotional-model
+This repository contains a real-time facial expression recognition system integrated with a fuzzy logic–based emotional model for social robotics applications. It includes the full ROS pipeline for emotion perception, fuzzy-state management, personality-dependent behaviour modulation, and dynamic navigation parameter adaptation on the TIAGorobot.
