@@ -1,0 +1,53 @@
+{
+    "name": "tuning",
+    "delay_const": 10,
+    "use_delay": true,
+    "inputs": {
+        "alertness": {
+            "range": [0, 101, 1],
+            "sets": {
+                "calm": ["trapmf", [50, 75, 100, 100]],
+                "standard": ["trimf", [25, 50, 75]],
+                "fear": ["trapmf", [0, 0, 25, 50]]
+            },
+            "default": 30
+        },
+        "tuning": {
+            "range": [0, 121, 1],
+            "sets": {
+                "low": ["trapmf", [0, 0, 15, 30]],
+                "medium": ["trimf", [20, 50, 80]],
+                "high": ["trapmf", [70, 90, 120, 120]]
+            },
+            "default": 50
+        }
+    },
+    "output": {
+        "range": [0, 121, 1],
+        "sets": {
+            "low": ["trapmf", [0, 0, 15, 30]],
+            "medium": ["trimf", [20, 50, 80]],
+            "high": ["trapmf", [70, 90, 120, 120]]
+        },
+        "default": 50
+    },
+    "rules": [
+        { "if": [["alertness", "calm"], ["tuning", "low"]], "then": "medium" },
+        { "if": [["alertness", "calm"], ["tuning", "medium"]], "then": "medium" },
+        { "if": [["alertness", "calm"], ["tuning", "high"]], "then": "high" },
+
+        { "if": [["alertness", "standard"], ["tuning", "low"]], "then": "low" },
+        { "if": [["alertness", "standard"], ["tuning", "medium"]], "then": "medium" },
+        { "if": [["alertness", "standard"], ["tuning", "high"]], "then": "high" },
+
+        { "if": [["alertness", "fear"], ["tuning", "low"]], "then": "low" },
+        { "if": [["alertness", "fear"], ["tuning", "medium"]], "then": "low" },
+        { "if": [["alertness", "fear"], ["tuning", "high"]], "then": "medium" }
+    ],
+
+    "mapping": [
+        [0, 25, "low"],
+        [25, 65, "medium"],
+        [65, 121, "high"]
+    ]
+}

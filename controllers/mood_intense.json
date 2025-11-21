@@ -1,0 +1,95 @@
+{
+  "name": "mood",
+  "personality": "intense",
+  "delay_const": 3,
+  "use_delay": true,
+  "inputs": {
+    "mood": {
+      "range": [0, 121, 1],
+      "sets": {
+        "very_sad": ["trapmf", [0, 0, 15, 30]],
+        "sad": ["trimf", [15, 30, 45]],
+        "standard": ["trimf", [30, 45, 80]],
+        "happy": ["trimf", [45, 80, 100]],
+        "very_happy": ["trapmf", [80, 100, 120, 120]]
+      },
+      "default": 50
+    },
+  
+  
+   "face": {
+      "range": [0, 7, 1],
+      "sets": {
+        "neutral": ["trapmf", [0, 0, 0, 0]],
+         "happy": ["trapmf", [1, 1, 1, 1]],
+    	 "sad": ["trapmf", [2, 2, 2, 2]],
+    	 "surprise": ["trapmf", [3, 3, 3, 3]],
+    	 "disgust": ["trapmf", [4, 4, 4, 4]],
+    	 "fear": ["trapmf", [5, 5, 5, 5]],
+    	 "angry": ["trapmf", [6, 6, 6, 6]]
+      },
+      "default": 0
+    }
+  },
+  
+  "output": {
+        "range": [0, 121, 1],
+        "sets": {
+            "very_sad": ["trapmf", [0, 0, 15, 30]],
+            "sad": ["trimf", [15, 30, 45]],
+            "standard": ["trimf", [30, 45, 80]],
+            "happy": ["trimf", [60, 80, 100]],
+            "very_happy": ["trapmf", [80, 100, 120, 120]]
+        }
+    },
+ 
+   "rules": [
+    { "if": [["face", "neutral"], ["mood", "very_sad"]], "then": "very_sad" },
+    { "if": [["face", "happy"], ["mood", "very_sad"]], "then": "standard" },
+    { "if": [["face", "sad"], ["mood", "very_sad"]], "then": "very_sad" },
+    { "if": [["face", "surprise"], ["mood", "very_sad"]], "then": "very_sad" },
+    { "if": [["face", "disgust"], ["mood", "very_sad"]], "then": "very_sad" },
+    { "if": [["face", "fear"], ["mood", "very_sad"]], "then": "very_sad" },
+    { "if": [["face", "angry"], ["mood", "very_sad"]], "then": "very_sad" },
+
+    { "if": [["face", "neutral"], ["mood", "sad"]], "then": "sad" },
+    { "if": [["face", "happy"], ["mood", "sad"]], "then": "standard" },
+    { "if": [["face", "sad"], ["mood", "sad"]], "then": "very_sad" },
+    { "if": [["face", "surprise"], ["mood", "sad"]], "then": "sad" },
+    { "if": [["face", "disgust"], ["mood", "sad"]], "then": "very_sad" },
+    { "if": [["face", "fear"], ["mood", "sad"]], "then": "very_sad" },
+    { "if": [["face", "angry"], ["mood", "sad"]], "then": "very_sad" },
+
+    { "if": [["face", "neutral"], ["mood", "standard"]], "then": "standard" },
+    { "if": [["face", "happy"], ["mood", "standard"]], "then": "happy" },
+    { "if": [["face", "sad"], ["mood", "standard"]], "then": "sad" },
+    { "if": [["face", "surprise"], ["mood", "standard"]], "then": "standard" },
+    { "if": [["face", "disgust"], ["mood", "standard"]], "then": "sad" },
+    { "if": [["face", "fear"], ["mood", "standard"]], "then": "sad" },
+    { "if": [["face", "angry"], ["mood", "standard"]], "then": "sad" },
+
+    { "if": [["face", "neutral"], ["mood", "happy"]], "then": "happy" },
+    { "if": [["face", "happy"], ["mood", "happy"]], "then": "very_happy" },
+    { "if": [["face", "sad"], ["mood", "happy"]], "then": "standard" },
+    { "if": [["face", "surprise"], ["mood", "happy"]], "then": "happy" },
+    { "if": [["face", "disgust"], ["mood", "happy"]], "then": "sad" },
+    { "if": [["face", "fear"], ["mood", "happy"]], "then": "standard" },
+    { "if": [["face", "angry"], ["mood", "happy"]], "then": "sad" },
+
+    { "if": [["face", "neutral"], ["mood", "very_happy"]], "then": "very_happy" },
+    { "if": [["face", "happy"], ["mood", "very_happy"]], "then": "very_happy" },
+    { "if": [["face", "sad"], ["mood", "very_happy"]], "then": "standard" },
+    { "if": [["face", "surprise"], ["mood", "very_happy"]], "then": "very_happy" },
+    { "if": [["face", "disgust"], ["mood", "very_happy"]], "then": "standard" },
+    { "if": [["face", "fear"], ["mood", "very_happy"]], "then": "standard" },
+    { "if": [["face", "angry"], ["mood", "very_happy"]], "then": "standard" }
+  ],
+  "mapping": [
+        [0, 22.5, "very_sad"],
+        [22.5, 37.5, "sad"],
+        [37.5, 62.5, "standard"],
+        [62.5, 90, "happy"],
+        [90, 100, "very_happy"]
+    ]
+}
+

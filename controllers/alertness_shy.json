@@ -1,0 +1,70 @@
+{
+    "name": "alertness",
+    "delay_const": 20,
+    "use_delay": true,
+    "inputs": {
+        "alertness": {
+            "range": [0, 101, 1],
+            "sets": {
+                "fear": ["trapmf", [0, 0, 25, 50]],
+                "standard": ["trimf", [25, 50, 75]],
+                "calm": ["trapmf", [50, 75, 100, 100]]
+            },
+            "default": 30
+        },
+        
+    	"face": {
+	      "range": [0, 7, 1],
+	      "sets": {
+		"neutral": ["trapmf", [0, 0, 0, 0]],
+		"happy": ["trapmf", [1, 1, 1, 1]],
+	    	"sad": ["trapmf", [2, 2, 2, 2]],
+	    	"surprise": ["trapmf", [3, 3, 3, 3]],
+	    	"disgust": ["trapmf", [4, 4, 4, 4]],
+	    	"fear": ["trapmf", [5, 5, 5, 5]],
+	    	"angry": ["trapmf", [6, 6, 6, 6]]
+	      },
+	      "default": 0
+	    }
+	  },
+        
+        "output": {
+        "range": [0, 101, 1],
+        "sets": {
+            "fear": ["trapmf", [0, 0, 25, 50]],
+            "standard": ["trimf", [25, 50, 75]],
+            "calm": ["trapmf", [50, 75, 100, 100]]
+        }
+    },
+    "rules": [
+	  { "if": [["face", "neutral"], ["alertness", "calm"]], "then": "calm" },
+	  { "if": [["face", "happy"], ["alertness", "calm"]], "then": "calm" },
+	  { "if": [["face", "sad"], ["alertness", "calm"]], "then": "calm" },
+	  { "if": [["face", "surprise"], ["alertness", "calm"]], "then": "standard" },
+	  { "if": [["face", "disgust"], ["alertness", "calm"]], "then": "standard" },
+	  { "if": [["face", "fear"], ["alertness", "calm"]], "then": "standard" },
+	  { "if": [["face", "angry"], ["alertness", "calm"]], "then": "fear" },
+
+	  { "if": [["face", "neutral"], ["alertness", "standard"]], "then": "standard" },
+	  { "if": [["face", "happy"], ["alertness", "standard"]], "then": "standard" },
+	  { "if": [["face", "sad"], ["alertness", "standard"]], "then": "standard" },
+	  { "if": [["face", "surprise"], ["alertness", "standard"]], "then": "fear" },
+	  { "if": [["face", "disgust"], ["alertness", "standard"]], "then": "standard" },
+	  { "if": [["face", "fear"], ["alertness", "standard"]], "then": "fear" },
+	  { "if": [["face", "angry"], ["alertness", "standard"]], "then": "fear" },
+
+	  { "if": [["face", "neutral"], ["alertness", "fear"]], "then": "fear" },
+	  { "if": [["face", "happy"], ["alertness", "fear"]], "then": "fear" },
+	  { "if": [["face", "sad"], ["alertness", "fear"]], "then": "fear" },
+	  { "if": [["face", "surprise"], ["alertness", "fear"]], "then": "fear" },
+	  { "if": [["face", "disgust"], ["alertness", "fear"]], "then": "fear" },
+	  { "if": [["face", "fear"], ["alertness", "fear"]], "then": "fear" },
+	  { "if": [["face", "angry"], ["alertness", "fear"]], "then": "fear" }
+	],
+	"mapping": [
+		[0, 37.5, "calm"],
+		[37.5, 62.5, "standard"],
+		[62.5, 100, "fear"]
+	    ]
+	}
+
